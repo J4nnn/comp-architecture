@@ -7,7 +7,7 @@ def nand_gate(input1, input2):
     input2: The second input (True or False, 1 or 0).
 
     Returns:
-    True or False, 1 or 0 according to the following truth table:
+    True or False according to the following truth table:
     | a | b | q |
     | 0 | 0 | 1 |
     | 1 | 0 | 1 |
@@ -28,3 +28,5 @@ def nand_gate(input1, input2):
 # print(nand_gate(0, True))
 # print(nand_gate(True, 1))
 # print(nand_gate(1, "a"))
+
+# Reference: https://www.geeksforgeeks.org/what-is-nand-gate/
