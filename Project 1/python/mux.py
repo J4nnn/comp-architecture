@@ -7,7 +7,7 @@ def mux (s0, i0, i1):
     Simulates an 2:1 MUX using logical gates built with NAND.
 
     Args:
-    i0, i1: The input lines (True or False, 1 or 0).
+    i0, i1: The inputs (True or False, 1 or 0).
     s0: Single select line (True or 1 for i1, False or 0 for i0).
 
     Returns:
