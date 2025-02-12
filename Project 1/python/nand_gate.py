@@ -1,7 +1,7 @@
 def nand_gate(input1, input2):
     """
     Simulates a NAND logic gate.
-
+    
     Args:
     input1: The first input (True or False, 1 or 0).
     input2: The second input (True or False, 1 or 0).
