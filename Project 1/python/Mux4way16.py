@@ -27,8 +27,8 @@ test_inputs_D = "0101010101010101"
 test_select_S1S0 = [("0", "0"), ("0", "1"), ("1", "0"), ("1", "1")]
 
 # Mostrar los resultados en formato de tabla
-print("|       A        |       B        |       C        |       D        | S1 | S0 |       Out       |")
-print("|----------------|----------------|----------------|----------------|----|----|-----------------|")
+print("|        A         |         B        |        C         |        D         | S1 | S0 |        Out       |")
+print("|------------------|------------------|------------------|------------------|----|----|------------------|")
 for s1, s0 in test_select_S1S0:
     result = mux4way16(test_inputs_A, test_inputs_B, test_inputs_C, test_inputs_D, s1, s0)
     print(f"| {test_inputs_A} | {test_inputs_B} | {test_inputs_C} | {test_inputs_D} | {s1}  | {s0}  | {result} |")
