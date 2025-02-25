@@ -1,41 +1,15 @@
 from And import and_gate
 
-def and16(A, B):
+def and16(input1_bits, input2_bits):
     """
-    Simula una compuerta AND de 16 bits usando solo compuertas NAND.
-    
-    Args:
-    A: Cadena de 16 bits ('0' o '1').
-    B: Cadena de 16 bits ('0' o '1').
-
-    Returns:
-    Cadena de 16 bits resultante de A AND B.
+    Returns a 16-bit value where each bit is True (1) only if both corresponding bits in the two inputs are True (1).
     """
-    return "".join(str(and_gate(int(a), int(b))) for a, b in zip(A, B))
+    return [int(and_gate(input1_bits[bit], input2_bits[bit])) for bit in range(len(input1_bits))] # Can use both input1_bits as input2_bits
 
-# Pruebas con valores de la imagen
-test_inputs_A = [
-    "0000000000000000",
-    "0000000000000000",
-    "1111111111111111",
-    "1010101010101010",
-    "0011110011000011",
-    "0001001000110100   "
-]
-
-test_inputs_B = [
-    "0000000000000000",
-    "1111111111111111",
-    "1111111111111111",
-    "0101010101010101",
-    "0000111111111000",
-    "1001100011111010"
-]
-
-# Mostrar los resultados en formato de tabla
-print("|       a          |       b          |       out        |")
-print("|------------------|------------------|------------------|")
-for a, b in zip(test_inputs_A, test_inputs_B):
-    result = and16(a, b)
-    print(f"| {a} | {b} | {result} |")
-
+# Testing, it works
+# print("input1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], input2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] -> ", and16([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))
+# print("input1 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], input2 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -> ", and16([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+# print("input1 = [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1], input2 = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0] -> ", and16([0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1], [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]))
+# print("input1 = [0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0], input2 = [1,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1] -> ", and16([0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0], [1,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1]))
+# print("input1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], input2 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -> ", and16([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+# print("input1 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], input2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] -> ", and16([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))

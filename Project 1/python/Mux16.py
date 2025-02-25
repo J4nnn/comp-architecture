@@ -1,41 +1,15 @@
-from Mux import mux as mux_gate
+from Mux import mux
 
-def mux16(A, B, S):
+def mux16(sel, input1_bits, input2_bits):
     """
-    Simula un MUX de 16 bits usando solo compuertas NAND.
-
-    Args:
-    A: Cadena de 16 bits ('0' o '1') (entrada 0).
-    B: Cadena de 16 bits ('0' o '1') (entrada 1).
-    S: Bit de selección ('0' o '1').
-
-    Returns:
-    Cadena de 16 bits con la salida seleccionada.
+    Selects and returns a 16-bit value from either input 'a' or input 'b', based on a single select bit.
     """
-    return "".join(str(mux_gate(int(a), int(b), int(S))) for a, b in zip(A, B))
+    return [int(mux(sel, input1_bits[bit], input2_bits[bit])) for bit in range(len(input1_bits))]
 
-# Pruebas con valores de la imagen
-test_inputs_A = [
-    "0000000000000000",
-    "0000000000000000",
-    "1001100001110110",
-    "1010101010101010",
-    "0001001000110100"
-]
-
-test_inputs_B = [
-    "0000000000000000",
-    "0001001000110100",
-    "0000000000000000",
-    "0101010101010101",
-    "1001100011111010"
-]
-
-test_select_S = ["0", "1", "0", "1", "0"]
-
-# Mostrar los resultados en formato de tabla
-print("|       a        |       b        |  sel |       out       |")
-print("|----------------|----------------|------|----------------|")
-for a, b, s in zip(test_inputs_A, test_inputs_B, test_select_S):
-    result = mux16(a, b, s)
-    print(f"| {a} | {b} |  {s}  | {result} |")
+# Testing, it works
+# print("sel = 0, input1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], input2 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -> ", mux16(0, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+# print("sel = 1, input1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], input2 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -> ", mux16(1, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+# print("sel = 0, input1 = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0], input2 = [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1] -> ", mux16(0, [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0], [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]))
+# print("sel = 1, input1 = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0], input2 = [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1] -> ", mux16(1, [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0], [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]))
+# print("sel = 0, input1 = [0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0], input2 = [1,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1] -> ", mux16(0, [0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0], [1,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1]))
+# print("sel = 1, input1 = [0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0], input2 = [1,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1] -> ", mux16(1, [0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0], [1,1,0,0,1,0,0,1,0,1,1,0,0,1,0,1]))

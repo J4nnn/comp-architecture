@@ -1,36 +1,21 @@
 from Dmux import dmux
+from Not import not_gate
 
-def dmux4way(in_signal, S1, S0):
+def dmux4way(sel1, sel2, input):
     """
-    Simula un DMUX4WAY usando solo NAND.
-
-    Args:
-    in_signal: Bit de entrada ('0' o '1').
-    S1, S0: Bits de selección ('0' o '1').
-
-    Returns:
-    (O1, O2, O3, O4): Tupla con los 4 bits de salida.
+    Routes a single input to one of four outputs based on a 2-bit select signal.
     """
-    # Primera división usando S1
-    X, Y = dmux(in_signal, S1)
+    # First split
+    a, b = dmux(sel1, input)
+    # Second split
+    q1, q2 = dmux(sel2, a)
+    q3, q4 = dmux(sel2, b)
+    return int(q1), int(q2), int(q3), int(q4)
 
-    # Segunda división usando S0
-    O1, O2 = dmux(X, S0)
-    O3, O4 = dmux(Y, S0)
+    # return dmux(sel2, dmux(sel1, input)[0])[0], dmux(sel2, dmux(sel1, input)[0])[1], dmux(sel2, dmux(sel1, input)[1])[0], dmux(sel2, dmux(sel1, input)[1])[1]
 
-    return O1, O2, O3, O4
-
-# Pruebas con los valores de la tabla de verdad
-test_cases = [
-    ("0", "00", "0"),
-    ("0", "01", "0"),
-    ("0", "10", "0"),
-    ("0", "11", "0"),
-]
-
-# Imprimir la tabla de resultados
-print("| in | S1 | S0 | O1 | O2 | O3 | O4 |")
-print("|----|----|----|----|----|----|----|")
-for in_signal, S1, S0 in test_cases:
-    O1, O2, O3, O4 = dmux4way(in_signal, S1, S0)
-    print(f"|  {in_signal}  |  {S1}  |  {S0}  |  {O1}  |  {O2}  |  {O3}  |  {O4}  |")
+# Testing, it works
+# print("sel1=0, sel2=0, input=1 ->", dmux4way(0, 0, 1)) 
+# print("sel1=0, sel2=1, input=1 ->", dmux4way(0, 1, 1)) 
+# print("sel1=1, sel2=0, input=1 ->", dmux4way(1, 0, 1)) 
+# print("sel1=1, sel2=1, input=1 ->", dmux4way(1, 1, 1))

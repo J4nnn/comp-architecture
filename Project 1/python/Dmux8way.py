@@ -1,46 +1,25 @@
 from Dmux import dmux
+from Dmux4way import dmux4way
 
-def dmux8way(in_signal, S2, S1, S0):
+def dmux8way(sel1, sel2, sel3, input):
     """
-    Simula un DMUX8WAY usando solo NAND.
-
-    Args:
-    in_signal: Bit de entrada ('0' o '1').
-    S2, S1, S0: Bits de selección ('0' o '1').
-
-    Returns:
-    (O1, O2, O3, O4, O5, O6, O7, O8): Tupla con los 8 bits de salida.
+    Routes a single input to one of eight outputs based on a 3-bit select signal.
     """
-    # Primera división usando S2
-    X1, X2 = dmux(in_signal, S2)
+    # First split
+    a, b = dmux(sel1, input)
+    # Second split
+    c, d, e, f = dmux4way(sel2, sel3, a)
+    g, h, i, j = dmux4way(sel2, sel3, b)
+# 
+    return c, d, e, f, g, h, i, j
+    # return dmux4way(sel2, sel3, dmux(sel1, input)[0])[0], dmux4way(sel2, sel3, dmux(sel1, input)[0])[1], dmux4way(sel2, sel3, dmux(sel1, input)[0])[2], dmux4way(sel2, sel3, dmux(sel1, input)[0])[3], dmux4way(sel2, sel3, dmux(sel1, input)[1])[0], dmux4way(sel2, sel3, dmux(sel1, input)[1])[1], dmux4way(sel2, sel3, dmux(sel1, input)[1])[2], dmux4way(sel2, sel3, dmux(sel1, input)[1])[3]
 
-    # Segunda división usando S1
-    Y1, Y2 = dmux(X1, S1)
-    Y3, Y4 = dmux(X2, S1)
-
-    # Tercera división usando S0
-    O1, O2 = dmux(Y1, S0)
-    O3, O4 = dmux(Y2, S0)
-    O5, O6 = dmux(Y3, S0)
-    O7, O8 = dmux(Y4, S0)
-
-    return O1, O2, O3, O4, O5, O6, O7, O8
-
-# Pruebas con los valores de la tabla de verdad
-test_cases = [
-    ("1", "0", "0", "0"),
-    ("1", "0", "0", "1"),
-    ("1", "0", "1", "0"),
-    ("1", "0", "1", "1"),
-    ("1", "1", "0", "0"),
-    ("1", "1", "0", "1"),
-    ("1", "1", "1", "0"),
-    ("1", "1", "1", "1"),
-]
-
-# Imprimir la tabla de resultados
-print("| in | S2 | S1 | S0 | O1 | O2 | O3 | O4 | O5 | O6 | O7 | O8 |")
-print("|----|----|----|----|----|----|----|----|----|----|----|----|")
-for in_signal, S2, S1, S0 in test_cases:
-    O1, O2, O3, O4, O5, O6, O7, O8 = dmux8way(in_signal, S2, S1, S0)
-    print(f"|  {in_signal}  |  {S2}  |  {S1}  |  {S0}  |  {O1}  |  {O2}  |  {O3}  |  {O4}  |  {O5}  |  {O6}  |  {O7}  |  {O8}  |")
+# Testing, it works
+# print("sel=000, input=1 -> ", dmux8way(0, 0, 0, 1))
+# print("sel=001, input=1 -> ", dmux8way(0, 0, 1, 1))
+# print("sel=010, input=1 -> ", dmux8way(0, 1, 0, 1))
+# print("sel=011, input=1 -> ", dmux8way(0, 1, 1, 1))
+# print("sel=100, input=1 -> ", dmux8way(1, 0, 0, 1))
+# print("sel=101, input=1 -> ", dmux8way(1, 0, 1, 1))
+# print("sel=110, input=1 -> ", dmux8way(1, 1, 0, 1))
+# print("sel=111, input=1 -> ", dmux8way(1, 1, 1, 1))

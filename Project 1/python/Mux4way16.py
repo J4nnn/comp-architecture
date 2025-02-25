@@ -1,34 +1,18 @@
 from Mux16 import mux16
 
-def mux4way16(A, B, C, D, S1, S0):
+def mux4way16(sel1, sel2, input1_bits, input2_bits, input3_bits, input4_bits):
     """
-    Simula un MUX4WAY16 usando solo NAND.
-
-    Args:
-    A, B, C, D: Cadenas de 16 bits ('0' o '1'), las entradas.
-    S1, S0: Bits de selección ('0' o '1').
-
-    Returns:
-    Cadena de 16 bits con la salida seleccionada.
+    Selects and returns one of four 16-bit inputs based on a 2-bit select signal.
     """
-    # Primer nivel de selección: MUX entre A y B, C y D
-    mux1 = mux16(A, B, S0)
-    mux2 = mux16(C, D, S0)
+    return mux16(sel1 ,mux16(sel2, input1_bits, input2_bits), mux16(sel2, input3_bits, input4_bits))
 
-    # Segundo nivel de selección: MUX entre mux1 y mux2
-    return mux16(mux1, mux2, S1)
+# Testing, it works
+# input1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+# input2 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+# input3 = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+# input4 = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
 
-# Pruebas con valores de ejemplo
-test_inputs_A = "0000000000000000"
-test_inputs_B = "1111111111111111"
-test_inputs_C = "1010101010101010"
-test_inputs_D = "0101010101010101"
-
-test_select_S1S0 = [("0", "0"), ("0", "1"), ("1", "0"), ("1", "1")]
-
-# Mostrar los resultados en formato de tabla
-print("|        A         |         B        |        C         |        D         | S1 | S0 |        Out       |")
-print("|------------------|------------------|------------------|------------------|----|----|------------------|")
-for s1, s0 in test_select_S1S0:
-    result = mux4way16(test_inputs_A, test_inputs_B, test_inputs_C, test_inputs_D, s1, s0)
-    print(f"| {test_inputs_A} | {test_inputs_B} | {test_inputs_C} | {test_inputs_D} | {s1}  | {s0}  | {result} |")
+# print("sel1 = 0, sel2 = 0 -> ", mux4way16(0, 0, input1, input2, input3, input4))  # input1
+# print("sel1 = 0, sel2 = 1 -> ", mux4way16(0, 1, input1, input2, input3, input4))  # input3
+# print("sel1 = 1, sel2 = 0 -> ", mux4way16(1, 0, input1, input2, input3, input4))  # input2
+# print("sel1 = 1, sel2 = 1 -> ", mux4way16(1, 1, input1, input2, input3, input4))  # input4

@@ -1,29 +1,14 @@
 from Not import not_gate
 
-def not16(inputs):
+def not16(input_bits):
     """
-    Simula una compuerta NOT de 16 bits usando solo compuertas NAND.
-    
-    Args:
-    inputs: Cadena de 16 caracteres ('0' o '1').
-
-    Returns:
-    Cadena de 16 caracteres invertidos ('1' por '0' y viceversa).
+    Inverts each of the 16 bits of the input, producing a 16-bit output.
     """
-    return "".join(str(not_gate(int(bit))) for bit in inputs)
+    return [int(not_gate(bit)) for bit in input_bits] # int function for better view in tests.
 
-# Pruebas con los valores de la imagen
-test_inputs = [
-    "0000000000000000",
-    "1111111111111111",
-    "1010101010101010",
-    "0011101101100011",
-    "0001001000110100"
-]
-
-# Mostrar los resultados en formato de tabla
-print("|       in         |       out        |")
-print("|------------------|------------------|")
-for binary in test_inputs:
-    result = not16(binary)
-    print(f"| {binary} | {result} |")
+# Testing, it works
+# print("input = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] -> ", not16([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))
+# print("input = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] -> ", not16([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]))
+# print("input = [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1] -> ", not16([0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]))
+# print("input = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0] -> ", not16([1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]))
+# print("input = [0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0] -> ", not16([0,0,1,1,0,1,1,0,1,0,0,1,1,0,1,0]))

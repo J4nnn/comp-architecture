@@ -1,26 +1,14 @@
 from And import and_gate
 from Not import not_gate
 
-def dmux(i0,s0):
+def dmux(sel, input):
     """
-    Simula un demultiplexor 2:1 utilizando puertas lógicas construidas con NAND.
-
-    Argumentos:
-    input: La entrada.
-    sel: La línea de control o selección (True o 1 para b (última salida), False o 0 para a (primera salida)).
-
-    Retorna:
-    True o False según la siguiente tabla:
-    | s0 |  a  |  b  |
-    | 0  |  0  | i0  |
-    | 1  | i0  |  0  |
+    Routes the input to output 'a' if 'sel' is False (0) and to output 'b' if 'sel' is True (1).
     """
-    return and_gate(i0, not_gate(s0)), and_gate(i0, s0)
+    return and_gate(input, not_gate(sel)), and_gate(input, sel)
 
-print(" | DMUX Truth Table | Result |")
-print(" | I = 0, S = 0 | DMUX =", dmux(0, 0), " | ")
-print(" | I = 0, S = 1 | DMUX =", dmux(0, 1), " | ")
-print(" | I = 1, S = 0 | DMUX =", dmux(1, 0), " | ")
-print(" | I = 1, S = 1 | DMUX =", dmux(1, 1), " | ")
-
-
+# Testing the 1:2 DEMUX
+# print("sel = 0, input  = 0 -> ", dmux(0, 0))
+# print("sel = 0, input  = 1 -> ", dmux(0, 1))
+# print("sel = 1, input  = 0 -> ", dmux(1, 0))
+# print("sel = 1, input  = 1 -> ", dmux(1, 1))
