@@ -27,7 +27,6 @@ def Add16(a, b):
     return int_to_binary(result)
 
 def ALU(x, y, zx, nx, zy, ny, f, no):
-    """Implementa la ALU de Nand2Tetris con las señales de control dadas."""
     # Asegurarse de que x e y sean cadenas binarias de 16 bits
     if not isinstance(x, str) or len(x) != 16:
         x = int_to_binary(int(x)) if isinstance(x, int) else '0' * 16
